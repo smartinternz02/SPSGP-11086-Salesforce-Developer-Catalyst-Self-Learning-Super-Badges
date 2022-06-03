@@ -1,0 +1,13 @@
+trigger ClosedOpportunityTrigger on Opportunity (after insert,after update) {
+	List<Task> t = new List<Task>();
+    for(Opportunity o : Trigger.new){
+        if(o.StageName == 'Closed Won'){
+            Task temp = new Task();
+            temp.Subject = 'Follow Up Test Task';
+            temp.WhatId = o.Id;
+            t.add(temp);
+        }
+        
+    }
+    insert t;
+}
