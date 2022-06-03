@@ -1,0 +1,19 @@
+@IsTest
+private class WarehouseCalloutServiceTest {
+    @isTest
+    static void test(){
+    // Boiler Plate
+    test.startTest();
+    Test.setMock(HttpCalloutMock.class, new WarehouseCalloutServiceMock()); 
+    WarehouseCalloutService.execute(null);
+        test.stopTest();
+    //Boiler PLate end
+    List<Product2> product2List = new List<Product2>();
+        product2List = [SELECT ProductCode FROM Product2];
+        //Assert
+        System.assertEquals(2, product2List.size());
+        System.assertEquals('55d66226726b611100aaf73f', product2List.get(0).ProductCode);
+        System.assertEquals('55d66226726b611100aaf740', product2List.get(1).ProductCode);
+    }
+
+}
